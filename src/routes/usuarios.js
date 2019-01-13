@@ -12,6 +12,9 @@ const app = express();
 //         }
 //     });
 // })
+router.get('/', function(req, res) {
+    res.json('get Usuario');
+});
 
 router.get('/usuarios', function(req, res) {
     res.json('get Usuario');

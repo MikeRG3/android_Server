@@ -19,6 +19,6 @@ app.use(require('./routes/usuarios'));
 
 //Starting server
 
-app.listen(app.get('port'), () => {
+app.listen(process.env.PORT, () => {
     console.log("Server on port", process.env.PORT);
 });
