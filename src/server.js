@@ -1,9 +1,11 @@
+require("./config/config")
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 
 //Settings on express
-app.set('port', process.env.PORT || 3000); //Configuramos el puerto:el del servidor o si es localhost, el 3000
+app.set('port', process.env.PORT); //Configuramos el puerto:el del servidor o si es localhost, el 3000
 
 
 //MiddleWares (funciones que se ejecuten antes de las rutas)
@@ -18,5 +20,5 @@ app.use(require('./routes/usuarios'));
 //Starting server
 
 app.listen(app.get('port'), () => {
-    console.log("Server on port 3000");
+    console.log("Server on port", process.env.PORT);
 });
