@@ -1,29 +1,10 @@
-const mysql = require('mysql');
+const mongoose = require('mongoose');
 
-
-const mysqlConnection = mysql.createConnection({
-    host: 'mrodriguezg.000webhostapp.com',
-    database: 'id8420784_android',
-    user: 'id8420784_mrodriguezg',
-    password: '12345'
-});
-
-// const mysqlConnection = mysql.createConnection({
-//     host: 'localhost',
-//     database: 'id8420784_android',
-//     user: 'root',
-//     password: '12345'
-// });
-
-mysqlConnection.connect((err) => {
+//CONECT TO DB
+mongoose.connect('mongodb://admin:a123456@ds151651.mlab.com:51651/android', (err, res) => {
     if (err) {
         console.log(err);
-        return;
     } else {
-        console.log("DB connected");
+        console.log("Connected to DB");
     }
 });
-
-
-
-module.exports = mysqlConnection;

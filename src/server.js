@@ -1,8 +1,12 @@
+//IMPORTS
 require("./config/config")
+require("./database");
 
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser')
+
+
+const app = express();
 
 //Settings on express
 app.set('port', process.env.PORT); //Configuramos el puerto:el del servidor o si es localhost, el 3000
@@ -14,11 +18,12 @@ app.use(bodyParser.json()); //(body parser --> convierte el JSON para que lo ent
 
 // Routes (comunica servidor con navegador)
 app.use(require('./routes/usuarios'));
+app.use(require('./routes/incidencias'));
 
 
 
 //Starting server
 
-app.listen(process.env.PORT, () => {
+app.listen(app.get('port'), () => {
     console.log("Server on port", process.env.PORT);
 });
