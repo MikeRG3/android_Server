@@ -4,7 +4,7 @@ const Incidencia = require('../models/incidencias'); // Schema de Usuario
 
 
 
-// GET USERS
+// GET INCIDENCIAS
 
 router.get('/incidencias', function(req, res) {
 
@@ -31,8 +31,9 @@ router.post('/incidencias', function(req, res) {
     let body = req.body;
     let incidencia = new Incidencia({
         id_usuario: body.id_usuario,
-        title: body.title,
-        description: body.description
+        titulo: body.titulo,
+        descripcion: body.descripcion,
+        categoria: body.categoria
 
     }); //Instancia del Schema de Usuario.
 

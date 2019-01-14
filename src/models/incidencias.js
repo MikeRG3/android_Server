@@ -1,25 +1,34 @@
 const mongoose = require('mongoose');
+require("../models/categorias");
 //const uniqueValidator = require('mongoose-unique-validator')
+const Usuario = mongoose.model("Usuario");
+const Categoria = mongoose.model("Categoria");
 
 let Schema = mongoose.Schema;
 
 
 let incidenciasSchema = new Schema({
     id_usuario: {
-        type: String,
-        required: [true, "id required"]
+        type: Schema.ObjectId,
+        ref: "Usuario",
+        required: [true, "Id_User required"]
     },
-    title: {
+    titulo: {
         type: String,
         required: [true, "Title required"]
     },
-    description: {
+    descripcion: {
         type: String,
         required: [true, "Description required"]
     },
     fecha: {
         type: Date,
         default: new Date()
+    },
+    categoria: {
+        type: Schema.ObjectId,
+        ref: "Categoria",
+        required: [true, "Id_Category required"]
     }
 });
 

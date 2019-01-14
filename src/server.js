@@ -19,6 +19,7 @@ app.use(bodyParser.json()); //(body parser --> convierte el JSON para que lo ent
 // Routes (comunica servidor con navegador)
 app.use(require('./routes/usuarios'));
 app.use(require('./routes/incidencias'));
+app.use(require('./routes/categorias'));
 
 
 
