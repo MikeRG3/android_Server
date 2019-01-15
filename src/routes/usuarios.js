@@ -46,17 +46,20 @@ router.post('/login', function(req, res) {
 
         let message;
         let ok;
+        let admin;
         if (usuarioDB.length == 0) {
             ok = false;
             message = "Access Denied";
         } else {
             ok = true;
             message = "Access Granted";
+            admin = usuarioDB[0].admin;
+
         }
         res.json({
             ok,
             message,
-            admin: usuarioDB.admin
+            admin
         })
     })
 
@@ -102,7 +105,7 @@ router.put('/usuarios/:id', function(req, res) {
         email: body.email,
         admin: body.admin
     });
-    Usuario.findByOneAndUpdate(id, { password: usuario.password }, (err, usuarioDB) => {
+    Usuario.findOneAndUpdate(id, { password: usuario.password }, (err, usuarioDB) => {
         if (err) throw err;
 
         res.json({
