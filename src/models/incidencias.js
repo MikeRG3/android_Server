@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 require("../models/categorias");
+require("../models/respuestas");
 //const uniqueValidator = require('mongoose-unique-validator')
 const Usuario = mongoose.model("Usuario");
 const Categoria = mongoose.model("Categoria");
+const Respuesta = mongoose.model("Respuesta");
 
 let Schema = mongoose.Schema;
 
@@ -29,7 +31,15 @@ let incidenciasSchema = new Schema({
         type: Schema.ObjectId,
         ref: "Categoria",
         required: [true, "Id_Category required"]
-    }
+    },
+    respuestas: [{
+        id_usuario: String,
+        descripcion: String,
+        fecha: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 });
 
 
