@@ -12,12 +12,12 @@ let usuarioSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, "nick required"]
+        required: [true, "password required"]
     },
     email: {
         type: String,
         unique: true,
-        required: [true, "nick required"]
+        required: [true, "email required"]
     },
     admin: {
         type: Boolean,
