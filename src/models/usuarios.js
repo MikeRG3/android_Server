@@ -26,7 +26,6 @@ let usuarioSchema = new Schema({
     }
 });
 
-
 usuarioSchema.plugin(uniqueValidator, { message: '{PATH} repete' });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
