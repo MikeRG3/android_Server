@@ -19,6 +19,14 @@ let usuarioSchema = new Schema({
         unique: true,
         required: [true, "email required"]
     },
+    sexo: {
+        type: String,
+        required: [true, "gender required"]
+    },
+    nacimiento: {
+        type: String,
+        required: [true, "birth required"]
+    },
     admin: {
         type: Boolean,
         required: false,

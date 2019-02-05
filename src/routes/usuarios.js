@@ -33,7 +33,7 @@ router.get('/usuarios/:id', function(req, res) {
 });
 
 //LOGIN
-//Comrpueba usuario y contraseña
+//Comprueba usuario y contraseña
 router.post('/login', function(req, res) {
     let body = req.body;
     let usuario = new Usuario({
@@ -59,7 +59,7 @@ router.post('/login', function(req, res) {
         res.json({
             ok,
             message,
-            admin
+            usuarioDB: usuarioDB[0]
         })
     })
 
@@ -74,6 +74,8 @@ router.post('/usuarios', function(req, res) {
         nick: body.nick,
         password: body.password,
         email: body.email,
+        sexo: body.sexo,
+        nacimiento: body.nacimiento,
         admin: body.admin
     }); //Instancia del Schema de Usuario.
 
