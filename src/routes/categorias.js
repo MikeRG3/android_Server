@@ -4,25 +4,27 @@ const Categoria = require('../models/categorias'); // Schema de Usuario
 
 
 
-// GET USERS
+// GET 
 
 router.get('/categorias', function(req, res) {
 
-    Incidencia.find({})
+    Categoria.find({})
         .exec((err, categoriaDB) => {
             if (err)
                 return res.status(400).json({
                     ok: false,
                     err
                 });
-            res.json(categoriaDB);
+            res.json({
+                categorias: categoriaDB
+            });
         })
 
 });
 
 
 
-// INSERT USERS
+// INSERT 
 
 router.post('/categorias', function(req, res) {
     let body = req.body;
