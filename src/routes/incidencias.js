@@ -25,7 +25,7 @@ router.get('/incidencias/:id', function(req, res) {
     res.json(id);
 });
 
-// INSERT USERS
+// INSERT 
 
 router.post('/incidencias', function(req, res) {
     let body = req.body;
@@ -39,15 +39,15 @@ router.post('/incidencias', function(req, res) {
 
     incidencia.save((err, incidenciaDB) => {
         if (err) {
-            return res.status(400).json({
+            return res.status(200).json({
                 ok: "false",
                 err
             });
         }
 
         res.json({
-            ok: "true",
-            incidenciaDB
+            ok: "true"
+
         });
 
     })

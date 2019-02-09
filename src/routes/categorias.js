@@ -22,7 +22,17 @@ router.get('/categorias', function(req, res) {
 
 });
 
+router.get('/categoria', function(req, res) {
+    let nombre = req.query.nombre;
 
+    Categoria.find({ nombre }, function(err, categoriaDB) {
+        if (err) throw err;
+        res.json({
+            categorias: categoriaDB
+        })
+    })
+
+});
 
 // INSERT 
 

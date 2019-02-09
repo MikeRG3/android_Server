@@ -25,7 +25,7 @@ let incidenciasSchema = new Schema({
     },
     fecha: {
         type: Date,
-        default: new Date()
+        default: new Date().getTime()
     },
     categoria: {
         type: Schema.ObjectId,
