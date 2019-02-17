@@ -64,7 +64,7 @@ router.get('/buscadorincidenciadescripcion', function(req, res) {
                     err
                 });
             res.json({
-                incidenciaDB
+                incidencias: incidenciaDB
             });
         })
 });
