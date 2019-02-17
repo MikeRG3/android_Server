@@ -10,10 +10,12 @@ let Schema = mongoose.Schema;
 
 
 let incidenciasSchema = new Schema({
-    id_usuario: {
-        type: Schema.ObjectId,
-        ref: "Usuario",
-        required: [true, "Id_User required"]
+    nick_usuario: {
+        type: String,
+        required: [true, "Nick_User required"]
+    },
+    imagen_usuario: {
+        type: String,
     },
     titulo: {
         type: String,
@@ -28,16 +30,21 @@ let incidenciasSchema = new Schema({
         default: new Date().getTime()
     },
     categoria: {
-        type: Schema.ObjectId,
-        ref: "Categoria",
+        type: String,
         required: [true, "Id_Category required"]
     },
     respuestas: [{
-        id_usuario: String,
-        descripcion: String,
+        nick: {
+            type: String,
+            required: [true, "Nick_User required"]
+        },
+        descripcion: {
+            type: String,
+            required: [true, "Descripcion required"]
+        },
         fecha: {
             type: Date,
-            default: Date.now
+            default: new Date().getTime()
         }
     }]
 });

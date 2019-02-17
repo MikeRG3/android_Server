@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 
-const Usuario = mongoose.model("Usuario");
 
 let Schema = mongoose.Schema;
 
 
 let respuestasSchema = new Schema({
-    id_usuario: {
-        type: Schema.ObjectId,
-        ref: "Usuario",
+    nick: {
+        type: String,
         required: [true, "User required"]
     },
     descripcion: {

@@ -3,16 +3,17 @@ const router = express.Router();
 const Incidencia = require('../models/incidencias'); // Schema de Incidencia
 const Respuesta = require('../models/respuestas');
 
-router.put('/respuesta/:id', function(req, res) {
+router.put('/respuesta', function(req, res) {
     let body = req.body;
     let respuesta = new Respuesta({
-        id_usuario: body.id_usuario,
-        descripcion: body.descripcion
+        nick: body.nick,
+        descripcion: body.descripcion,
+        fecha: body.fecha
     });
 
-    let id = req.params.id;
+    let id = req.query.id;
 
-    Incidencia.findByIdAndUpdate(id, { $push: { respuestas: respuesta } }, (err, incidenciaDB) => {
+    Incidencia.findByIdAndUpdate({ _id: id }, { $push: { respuestas: respuesta } }, (err, incidenciaDB) => {
 
         if (err) {
             return res.status(400).json({
@@ -20,45 +21,50 @@ router.put('/respuesta/:id', function(req, res) {
                 err
             });
         }
+
         res.json({
-            ok: true,
-            incidenciaDB
+            ok: true
         });
     })
 });
-//
 
-// router.put('/respuesta/:id', function(req, res) {
-//     let body = req.body;
+router.get("/respuesta", function(req, res) {
+        let id = req.query.id;
 
+        Incidencia.findById({ _id: id }, (err, incidenciaDB) => {
 
-//     let respuesta = new Respuesta({
-//         id_usuario: body.id_usuario,
-//         descripcion: body.descripcion
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
 
-//     })
-//     respuesta.save((err, respuestaDB) => {
-//         if (err) throw err;
+            res.json({
 
-//         let id = req.params.id;
-//         Incidencia.findByIdAndUpdate(id, { $push: { respuesta: respuestaDB.id } }, (err, incidenciaDB) => {
+                respuestas: incidenciaDB.respuestas
+            });
+        })
+    })
+    //
 
-//             if (err) {
-//                 return res.status(400).json({
-//                     ok: false,
-//                     err
-//                 });
-//             }
+router.put('/delrespuesta', function(req, res) {
+    let incidencia = req.query.incidencia;
+    let respuesta = req.query.respuesta;
+    console.log(incidencia);
+    console.log(respuesta);
+    Incidencia.update({ _id: incidencia }, { $pull: { "respuestas": { _id: respuesta } } })
+        .exec((err, incidenciaDB) => {
+            if (err)
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            res.json({
+                ok: "true"
 
-
-
-//             res.json({
-//                 ok: true,
-//                 incidenciaDB
-//             });
-//         })
-
-//     });
-// });
+            });
+        })
+});
 
 module.exports = router;

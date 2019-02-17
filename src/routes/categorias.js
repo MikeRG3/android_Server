@@ -8,7 +8,7 @@ const Categoria = require('../models/categorias'); // Schema de Usuario
 
 router.get('/categorias', function(req, res) {
 
-    Categoria.find({})
+    Categoria.find({}).sort({ nombre: 1 })
         .exec((err, categoriaDB) => {
             if (err)
                 return res.status(400).json({
@@ -21,7 +21,7 @@ router.get('/categorias', function(req, res) {
         })
 
 });
-
+//Categoria pasando por GET el nombre
 router.get('/categoria', function(req, res) {
     let nombre = req.query.nombre;
 

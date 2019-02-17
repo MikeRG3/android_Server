@@ -16,21 +16,37 @@ router.get('/usuarios', function(req, res) {
                     ok: false,
                     err
                 });
-            res.json(usuariosDB);
+            res.json({ usuarios: usuariosDB });
         })
 
 });
 //Obtiene los datos del usuario por ID
-router.get('/usuarios/:id', function(req, res) {
-    let id = req.params.id;
-    Usuario.findById(id, function(err, usuarioDB) {
+router.get('/usuarionick', function(req, res) {
+    let nick = req.query.nick;
+    Usuario.find({ nick }, function(err, usuarioDB) {
         if (err) throw err;
         res.json({
-            ok: true,
-            usuarioDB
+
+            usuario: usuarioDB[0]
         })
     })
 });
+
+router.get('/buscadorusuario', function(req, res) {
+    let buscar = req.query.buscar;
+    Usuario.find({ nick: { $regex: ".*" + buscar + ".*", $options: 'i' } })
+        .exec((err, usuarioDB) => {
+            if (err)
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            res.json({
+                usuarios: usuarioDB
+            });
+        })
+});
+
 
 //LOGIN
 //Comprueba usuario y contraseña
@@ -76,6 +92,7 @@ router.post('/usuarios', function(req, res) {
         email: body.email,
         sexo: body.sexo,
         nacimiento: body.nacimiento,
+        imagen: body.imagen,
         admin: body.admin
     }); //Instancia del Schema de Usuario.
 
@@ -97,22 +114,29 @@ router.post('/usuarios', function(req, res) {
 
 //UPDATE USUARIOS
 
-router.put('/usuarios/:id', function(req, res) {
-    let id = req.params.id;
+router.put('/usuarios', function(req, res) {
+    let _id = req.query.id;
     let body = req.body;
 
     let usuario = new Usuario({
         nick: body.nick,
         password: body.password,
         email: body.email,
+        sexo: body.sexo,
+        nacimiento: body.nacimiento,
         admin: body.admin
     });
-    Usuario.findOneAndUpdate(id, { password: usuario.password }, (err, usuarioDB) => {
-        if (err) throw err;
+    console.log(usuario.nick);
+    Usuario.findOneAndUpdate({ _id: req.query.id }, { password: usuario.password, email: usuario.email, sexo: usuario.sexo, nacimiento: usuario.nacimiento }, (err, usuarioDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: "false",
+                error: err.message
+            });
+        }
 
         res.json({
-            ok: true,
-            usuarioDB
+            ok: true
         })
     })
 
@@ -120,17 +144,14 @@ router.put('/usuarios/:id', function(req, res) {
 
 
 //DELETE 
-router.delete('/usuarios/:id', function(req, res) {
-    let id = req.params.id;
-    let body = req.body;
+router.delete('/usuario', function(req, res) {
+    let id = req.query.id;
 
-
-    Usuario.findOneAndDelete(id, (err, usuarioDB) => {
+    Usuario.findByIdAndDelete({ _id: id }, (err, usuarioDB) => {
         if (err) throw err;
 
         res.json({
-            ok: true,
-            message: "User delete"
+            ok: true
         })
     })
 

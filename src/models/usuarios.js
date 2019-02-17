@@ -27,6 +27,10 @@ let usuarioSchema = new Schema({
         type: String,
         required: [true, "birth required"]
     },
+    imagen: {
+        type: String,
+
+    },
     admin: {
         type: Boolean,
         required: false,
