@@ -7,6 +7,7 @@ router.put('/respuesta', function(req, res) {
     let body = req.body;
     let respuesta = new Respuesta({
         nick: body.nick,
+        imagen: body.imagen,
         descripcion: body.descripcion,
         fecha: body.fecha
     });

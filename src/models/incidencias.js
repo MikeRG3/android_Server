@@ -38,6 +38,10 @@ let incidenciasSchema = new Schema({
             type: String,
             required: [true, "Nick_User required"]
         },
+        imagen: {
+            type: String,
+            required: [true, "Nick_User required"]
+        },
         descripcion: {
             type: String,
             required: [true, "Descripcion required"]

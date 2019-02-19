@@ -69,6 +69,22 @@ router.get('/buscadorincidenciadescripcion', function(req, res) {
         })
 });
 
+router.get('/misincidencias', function(req, res) {
+    let nick = req.query.nick;
+    Incidencia.find({ nick_usuario: nick })
+        .exec((err, incidenciaDB) => {
+            if (err)
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+
+            res.json({
+                incidencias: incidenciaDB
+            });
+        })
+});
+
 // INSERT 
 
 router.post('/incidencias', function(req, res) {

@@ -9,6 +9,10 @@ let respuestasSchema = new Schema({
         type: String,
         required: [true, "User required"]
     },
+    imagen: {
+        type: String,
+        required: [true, "User required"]
+    },
     descripcion: {
         type: String,
         required: [true, "Description required"]

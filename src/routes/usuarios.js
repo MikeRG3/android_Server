@@ -53,11 +53,11 @@ router.get('/buscadorusuario', function(req, res) {
 router.post('/login', function(req, res) {
     let body = req.body;
     let usuario = new Usuario({
-        nick: body.nick,
+        nick: body.nick.toLowerCase(),
         password: body.password
     });
 
-    Usuario.find({ "nick": usuario.nick, "password": usuario.password }, (err, usuarioDB) => {
+    Usuario.find({ "nick": usuario.nick.trim(), "password": usuario.password }, (err, usuarioDB) => {
         if (err) throw err;
 
         let message;
@@ -87,7 +87,7 @@ router.post('/login', function(req, res) {
 router.post('/usuarios', function(req, res) {
     let body = req.body;
     let usuario = new Usuario({
-        nick: body.nick,
+        nick: body.nick.toLowerCase(),
         password: body.password,
         email: body.email,
         sexo: body.sexo,
