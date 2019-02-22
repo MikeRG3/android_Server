@@ -128,7 +128,7 @@ router.put('/usuarios', function(req, res) {
         admin: body.admin
     });
     console.log(usuario.nick);
-    Usuario.findOneAndUpdate({ _id: req.query.id }, { password: usuario.password, email: usuario.email, sexo: usuario.sexo, nacimiento: usuario.nacimiento }, (err, usuarioDB) => {
+    Usuario.findOneAndUpdate({ _id: req.query.id }, { password: usuario.password, imagen: usuario.imagen, email: usuario.email, sexo: usuario.sexo, nacimiento: usuario.nacimiento }, (err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
                 ok: "false",
