@@ -5,7 +5,7 @@ const Categoria = require('../models/categorias'); // Schema de Usuario
 
 
 
-// GET INCIDENCIAS
+// GET INCIDENCIAS POR CATEGORIA
 
 router.get('/incidencias', function(req, res) {
     let nombreCategoria = req.query.categoria;
@@ -71,7 +71,7 @@ router.get('/buscadorincidenciadescripcion', function(req, res) {
 
 router.get('/misincidencias', function(req, res) {
     let nick = req.query.nick;
-    Incidencia.find({ nick_usuario: nick })
+    Incidencia.find({ nick_usuario: nick }).sort({ fecha: 1 })
         .exec((err, incidenciaDB) => {
             if (err)
                 return res.status(400).json({

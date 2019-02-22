@@ -121,6 +121,7 @@ router.put('/usuarios', function(req, res) {
     let usuario = new Usuario({
         nick: body.nick,
         password: body.password,
+        imagen: body.imagen,
         email: body.email,
         sexo: body.sexo,
         nacimiento: body.nacimiento,
